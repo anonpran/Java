@@ -1,0 +1,145 @@
+package com.example.demo3;
+
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+public class LoginSignupForm extends Application {
+
+    private Stage window;
+    private Scene loginScene, signupScene;
+
+    @Override
+    public void start(Stage primaryStage) {
+        window = primaryStage;
+        window.setTitle("Login/Signup Form");
+
+        GridPane loginGrid = new GridPane();
+        loginGrid.setAlignment(Pos.CENTER);
+        loginGrid.setHgap(10);
+        loginGrid.setVgap(10);
+        loginGrid.setPadding(new Insets(25, 25, 25, 25));
+
+        Label loginLabel = new Label("Login");
+        loginLabel.setStyle("-fx-font-size: 24px; -fx-font-weight:bold;");
+        loginGrid.add(loginLabel, 0, 0, 2, 1);
+
+        Label usernameLabelLogin = new Label("Username:");
+        loginGrid.add(usernameLabelLogin, 0, 1);
+
+        TextField usernameTextFieldLogin = new TextField();
+        loginGrid.add(usernameTextFieldLogin, 1, 1);
+
+        Label passwordLabelLogin = new Label("Password:");
+        loginGrid.add(passwordLabelLogin, 0, 2);
+
+        PasswordField passwordTextFieldLogin = new PasswordField();
+        loginGrid.add(passwordTextFieldLogin, 1, 2);
+
+        Button loginButton = new Button("Login");
+        loginButton.setOnAction(e -> {
+            if (isValidCredentials(usernameTextFieldLogin.getText(), passwordTextFieldLogin.getText())) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Login Successful");
+                alert.setHeaderText(null);
+                alert.setContentText("You have successfully logged in.");
+                alert.showAndWait();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Login Failed");
+                alert.setHeaderText(null);
+                alert.setContentText("Invalid username or password.");
+                alert.showAndWait();
+            }
+        });
+
+        Button switchSceneButton = new Button("Don't have an account? Signup");
+        switchSceneButton.setOnAction(e -> window.setScene(signupScene));
+
+        HBox loginButtons = new HBox(10);
+        loginButtons.setAlignment(Pos.BOTTOM_RIGHT);
+        loginButtons.getChildren().addAll(switchSceneButton, loginButton);
+        loginGrid.add(loginButtons, 1, 4);
+
+        GridPane signupGrid = new GridPane();
+        signupGrid.setAlignment(Pos.CENTER);
+        signupGrid.setHgap(10);
+        signupGrid.setVgap(10);
+        signupGrid.setPadding(new Insets(25, 25, 25, 25));
+
+        Label signupLabel = new Label("Signup");
+        signupLabel.setStyle("-fx-font-size: 24px; -fx-font-weight:bold;");
+        signupGrid.add(signupLabel, 0, 0, 2, 1);
+
+        Label usernameLabelSignup = new Label("Username:");
+        signupGrid.add(usernameLabelSignup, 0, 1);
+
+        TextField usernameTextFieldSignup = new TextField();
+        signupGrid.add(usernameTextFieldSignup, 1, 1);
+
+        Label passwordLabelSignup = new Label("Password:");
+        signupGrid.add(passwordLabelSignup, 0, 2);
+
+        PasswordField passwordTextFieldSignup = new PasswordField();
+        signupGrid.add(passwordTextFieldSignup, 1, 2);
+
+        Label confirmPasswordLabel = new Label("Confirm Password:");
+        signupGrid.add(confirmPasswordLabel, 0, 3);
+
+        PasswordField confirmPasswordTextField = new PasswordField();
+        signupGrid.add(confirmPasswordTextField, 1, 3);
+
+        Button signupButton = new Button("Signup");
+        signupButton.setOnAction(e -> {
+            if (isValidSignup(usernameTextFieldSignup.getText(), passwordTextFieldSignup.getText(), confirmPasswordTextField.getText())) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Signup Successful");
+                alert.setHeaderText(null);
+                alert.setContentText("You have successfully signed up.");
+                alert.showAndWait();
+                window.setScene(loginScene);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Signup Failed");
+                alert.setHeaderText(null);
+                alert.setContentText("Invalid username or password.");
+                alert.showAndWait();
+            }
+        });
+
+        Button switchSceneButton2 = new Button("Already have an account? Login");
+        switchSceneButton2.setOnAction(e -> window.setScene(loginScene));
+
+        HBox signupButtons = new HBox(10);
+        signupButtons.setAlignment(Pos.BOTTOM_RIGHT);
+        signupButtons.getChildren().addAll(switchSceneButton2, signupButton);
+        signupGrid.add(signupButtons, 1, 5);
+
+        loginScene = new Scene(loginGrid, 400, 250);
+        signupScene = new Scene(signupGrid, 400, 300);
+
+        window.setScene(loginScene);
+        window.show();
+    }
+
+    private boolean isValidCredentials(String username, String password) {
+        // replace with actual username and password validation logic
+        return username.equals("user") && password.equals("password");
+    }
+
+    private boolean isValidSignup(String username, String password, String confirmPassword) {
+        // replace with actual username and password validation logic
+        return !username.equals("") && password.equals(confirmPassword);
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+}
