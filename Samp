@@ -1,5 +1,6 @@
 package com.example.demo3;
 
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,6 +10,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoginSignupForm extends Application {
 
@@ -44,6 +48,18 @@ public class LoginSignupForm extends Application {
 
         Button loginButton = new Button("Login");
         loginButton.setOnAction(e -> {
+            //if usernameTextFieldLogin.getText()
+            Pattern pattern = Pattern.compile("[0-9][0-9][pP][CWTDcwtd][0-4][0-9]", Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(usernameTextFieldLogin.getText());
+            boolean matchFound = matcher.find();
+            if(!matchFound)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Login Failed AMCS");
+                alert.setHeaderText(null);
+                alert.setContentText("Invalid username or password.");
+                alert.showAndWait();
+            }
             if (isValidCredentials(usernameTextFieldLogin.getText(), passwordTextFieldLogin.getText())) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Login Successful");
@@ -97,6 +113,17 @@ public class LoginSignupForm extends Application {
 
         Button signupButton = new Button("Signup");
         signupButton.setOnAction(e -> {
+            Pattern pattern = Pattern.compile("[0-9][0-9][pP][CWTDcwtd][0-4][0-9]", Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(usernameTextFieldSignup.getText());
+            boolean matchFound = matcher.find();
+            if(!matchFound)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Login Failed AMCS");
+                alert.setHeaderText(null);
+                alert.setContentText("Invalid username or password.");
+                alert.showAndWait();
+            }
             if (isValidSignup(usernameTextFieldSignup.getText(), passwordTextFieldSignup.getText(), confirmPasswordTextField.getText())) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Signup Successful");
@@ -143,3 +170,4 @@ public class LoginSignupForm extends Application {
     }
 
 }
+
