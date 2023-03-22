@@ -1,0 +1,133 @@
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+   private Customer customer;
+   private ShoppingCart shoppingCart;
+
+   public static void main(String[] args) {
+      launch(args);
+   }
+
+   @Override
+   public void start(Stage primaryStage) {
+      // Initialize the customer object
+      customer = new Customer("John", "Doe");
+
+      // Initialize the shopping cart object and add items to it
+      shoppingCart = new ShoppingCart();
+      shoppingCart.addItem(new Item("Mouse", 10));
+      shoppingCart.addItem(new Item("Keyboard", 20));
+      shoppingCart.addItem(new Item("Monitor", 100));
+
+      // Create a grid pane for the layout
+      GridPane gridPane = new GridPane();
+      gridPane.setHgap(10);
+      gridPane.setVgap(10);
+      gridPane.setPadding(new Insets(10, 10, 10, 10));
+
+      // Add labels for the customer's name and shopping cart total price
+      Label nameLabel = new Label("Customer Name: " + customer.getFullName());
+      Label totalPriceLabel = new Label("Total Price: " + shoppingCart.getTotalPrice());
+      gridPane.add(nameLabel, 0, 0);
+      gridPane.add(totalPriceLabel, 0, 1);
+
+      // Set the scene and show the stage
+      Scene scene = new Scene(gridPane);
+      primaryStage.setTitle("JavaFX Inheritance, Composition, and Aggregation Demo");
+      primaryStage.setScene(scene);
+      primaryStage.show();
+   }
+}
+```
+
+#### Customer.java
+
+```java
+public class Customer {
+   private String firstName;
+   private String lastName;
+
+   public Customer(String firstName, String lastName) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+   }
+
+   public String getFirstName() {
+      return firstName;
+   }
+
+   public String getLastName() {
+      return lastName;
+   }
+
+   public String getFullName() {
+      return firstName + " " + lastName;
+   }
+}
+```
+
+#### ShoppingCart.java
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class ShoppingCart {
+   private List<Item> items;
+
+   public ShoppingCart() {
+      items = new ArrayList<Item>();
+   }
+
+   public void addItem(Item item) {
+      items.add(item);
+   }
+
+   public void removeItem(Item item) {
+      items.remove(item);
+   }
+
+   public List<Item> getItems() {
+      return items;
+   }
+
+   public int getTotalPrice() {
+      int totalPrice = 0;
+      for (Item item : items) {
+         totalPrice += item.getPrice();
+      }
+      return totalPrice;
+   }
+}
+```
+
+#### Item.java
+
+```java
+public class Item {
+   private String name;
+   private int price;
+
+   public Item(String name, int price) {
+      this.name = name;
+      this.price = price;
+   }
+
+   public String getName() {
+      return name;
+   }
+
+   public int getPrice() {
+      return price;
+   }
+
+   @Override
+   public String toString() {
+      return name + " (" + price + ")";
+   }
+}
