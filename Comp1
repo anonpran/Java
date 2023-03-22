@@ -1,0 +1,105 @@
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+   private Person person;
+   private Address address;
+
+   public static void main(String[] args) {
+      launch(args);
+   }
+
+   @Override
+   public void start(Stage primaryStage) {
+      // Initialize the person and address objects
+      person = new Person("John", "Doe");
+      address = new Address("123 Main St", "Anytown", "CA", "12345");
+
+      // Create a grid pane for the layout
+      GridPane gridPane = new GridPane();
+      gridPane.setHgap(10);
+      gridPane.setVgap(10);
+      gridPane.setPadding(new Insets(10, 10, 10, 10));
+
+      // Add labels for the person's name and address
+      Label nameLabel = new Label("Name: " + person.getFullName());
+      Label addressLabel = new Label("Address: " + address.toString());
+      gridPane.add(nameLabel, 0, 0);
+      gridPane.add(addressLabel, 0, 1);
+
+      // Set the scene and show the stage
+      Scene scene = new Scene(gridPane);
+      primaryStage.setTitle("Inheritance and Composition Demo");
+      primaryStage.setScene(scene);
+      primaryStage.show();
+   }
+}
+```
+
+#### Person.java
+
+```java
+public class Person {
+   private String firstName;
+   private String lastName;
+
+   public Person(String firstName, String lastName) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+   }
+
+   public String getFirstName() {
+      return firstName;
+   }
+
+   public String getLastName() {
+      return lastName;
+   }
+
+   public String getFullName() {
+      return firstName + " " + lastName;
+   }
+}
+```
+
+#### Address.java
+
+```java
+public class Address {
+   private String street;
+   private String city;
+   private String state;
+   private String zipcode;
+
+   public Address(String street, String city, String state, String zipcode) {
+      this.street = street;
+      this.city = city;
+      this.state = state;
+      this.zipcode = zipcode;
+   }
+
+   public String getStreet() {
+      return street;
+   }
+
+   public String getCity() {
+      return city;
+   }
+
+   public String getState() {
+      return state;
+   }
+
+   public String getZipcode() {
+      return zipcode;
+   }
+
+   @Override
+   public String toString() {
+      return street + ", " + city + ", " + state + " " + zipcode;
+   }
+}
