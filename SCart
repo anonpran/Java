@@ -1,0 +1,137 @@
+#cart
+#ShoppingCart.java
+package com.example.shoppingcart;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ShoppingCart {
+    private List<Item> items;
+
+    public ShoppingCart() {
+        items = new ArrayList<Item>();
+    }
+
+    public void addItem(Item item) {
+        items.add(item);
+    }
+
+    public void removeItem(Item item) {
+        items.remove(item);
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        for (Item item : items) {
+            totalPrice += item.getPrice();
+        }
+        return totalPrice;
+    }
+}
+
+#item.java
+package com.example.shoppingcart;
+
+public class Item {
+    private String name;
+    private int price;
+
+    public Item(String name, int price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    @Override
+    public String toString() {
+        return name + " (" + price + ")";
+    }
+}
+#ShopCartApp
+package com.example.shoppingcart;
+
+
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class ShoppingCartApp extends Application {
+    private ShoppingCart cart;
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        // Initialize the shopping cart
+        cart = new ShoppingCart();
+
+        // Create an item list
+        ListView<Item> itemList = new ListView<Item>();
+        itemList.getItems().addAll(new Item("Mouse", 10), new Item("Keyboard", 20),
+                new Item("Monitor", 100), new Item("Laptop", 500));
+
+        // Create a label for the total price
+        Label totalPriceLabel = new Label("Total Price: " + cart.getTotalPrice());
+
+        // Create a button for adding an item to the cart
+        Button addButton = new Button("Add to Cart");
+        addButton.setOnAction(event -> {
+            Item selectedItem = itemList.getSelectionModel().getSelectedItem();
+            if (selectedItem != null) {
+                cart.addItem(selectedItem);
+                totalPriceLabel.setText("Total Price: " + cart.getTotalPrice());
+            }
+        });
+
+        // Create a button for removing an item from the cart
+        Button removeButton = new Button("Remove from Cart");
+        removeButton.setOnAction(event -> {
+            Item selectedItem = cart.getItems().get(itemList.getSelectionModel().getSelectedIndex());
+            if (selectedItem != null) {
+                cart.removeItem(selectedItem);
+                totalPriceLabel.setText("Total Price: " + cart.getTotalPrice());
+            }
+        });
+
+        // Create a list view for the shopping cart
+        ListView<Item> cartList = new ListView<Item>();
+        cartList.getItems().addAll(cart.getItems());
+
+        // Create a grid pane for the buttons
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.add(addButton, 0, 0);
+        gridPane.add(removeButton, 1, 0);
+
+        // Create a vbox for the layout
+        VBox vbox = new VBox(10);
+        vbox.setPadding(new Insets(10, 10, 10, 10));
+        vbox.getChildren().addAll(itemList, gridPane, cartList, totalPriceLabel);
+
+        // Create a scene and set it to the primary stage
+        Scene scene = new Scene(vbox);
+        primaryStage.setTitle("Shopping Cart App");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+}
