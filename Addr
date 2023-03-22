@@ -1,274 +1,120 @@
-19-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
-class Address {
-  private String street; // instance variable for street
-  private String city; // instance variable for city
-  private String state; // instance variable for state
-
-  public Address(String street, String city, String state) {
-    this.street = street;
-    this.city = city;
-    this.state = state;
-  }
-
-  public String getStreet() {
-    return street;
-  }
-
-  public String getCity() {
-    return city;
-  }
-
-  public String getState() {
-    return state;
-  }
-}
+#19-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
 
 class Address {
-  private String street; // instance variable for street
-  private String city; // instance variable for city
-  private String state; // instance variable for state
+    private String street; // instance variable for street
+    private String city; // instance variable for city
+    private String state; // instance variable for state
 
-  public Address(String street, String city, String state) {
-    this.street = street;
-    this.city = city;
-    this.state = state;
-  }
+    public Address(String street, String city, String state) {
+        this.street = street;
+        this.city = city;
+        this.state = state;
+    }
 
-  public String getStreet() {
-    return street;
-  }
+    public String getStreet() {
+        return street;
+    }
 
-  public String getCity() {
-    return city;
-  }
+    public String getCity() {
+        return city;
+    }
 
-  public String getState() {
-    return state;
-  }
+    public String getState() {
+        return state;
+    }
 }
 
 class Person {
-  private String name; // instance variable for name
-  private Address address; // instance variable for address (aggregation relationship)
+    private String name; // instance variable for name
+    private Address address; // instance variable for address (aggregation relationship)
 
-  public Person(String name, Address address) {
-    this.name = name;
-    this.address = address;
-  }
+    public Person(String name, Address address) {
+        this.name = name;
+        this.address = address;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public Address getAddress() {
-    return address;
-  }
+    public Address getAddress() {
+        return address;
+    }
 }
 
 class Employee extends Person { // inheritance relationship
-  private int employeeId; // instance variable for employee ID
+    private int employeeId; // instance variable for employee ID
 
-  public Employee(String name, Address address, int employeeId) {
-    super(name, address);
-    this.employeeId = employeeId;
-  }
+    public Employee(String name, Address address, int employeeId) {
+        super(name, address);
+        this.employeeId = employeeId;
+    }
 
-  public int getEmployeeId() {
-    return employeeId;
-  }
-}
-
-class Address {
-  private String street; // instance variable for street
-  private String city; // instance variable for city
-  private String state; // instance variable for state
-
-  public Address(String street, String city, String state) {
-    this.street = street;
-    this.city = city;
-    this.state = state;
-  }
-
-  public String getStreet() {
-    return street;
-  }
-
-  public String getCity() {
-    return city;
-  }
-
-  public String getState() {
-    return state;
-  }
-}
-
-class Person {
-  private String name; // instance variable for name
-  private Address address; // instance variable for address (aggregation relationship)
-
-  public Person(String name, Address address) {
-    this.name = name;
-    this.address = address;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public Address getAddress() {
-    return address;
-  }
-}
-
-class Employee extends Person { // inheritance relationship
-  private int employeeId; // instance variable for employee ID
-
-  public Employee(String name, Address address, int employeeId) {
-    super(name, address);
-    this.employeeId = employeeId;
-  }
-
-  public int getEmployeeId() {
-    return employeeId;
-  }
+    public int getEmployeeId() {
+        return employeeId;
+    }
 }
 
 class Department {
-  private String name; // instance variable for name
-  private List<Employee> employees; // instance variable for list of employees (composition relationship)
+    private String name; // instance variable for name
+    private List<Employee> employees; // instance variable for list of employees (composition relationship)
 
-  public Department(String name) {
-    this.name = name;
-    this.employees = new ArrayList<>();
-  }
+    public Department(String name) {
+        this.name = name;
+        this.employees = new ArrayList<>();
+    }
 
-  public void addEmployee(Employee employee) {
-    employees.add(employee);
-  }
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
+    }
 
-  public List<Employee> getEmployees() {
-    return employees;
-  }
+    public List<Employee> getEmployees() {
+        return employees;
+    }
 
-  public String getName() {
-    return name;
-  }
-}
-
-class Address {
-  private String street; // instance variable for street
-  private String city; // instance variable for city
-  private String state; // instance variable for state
-
-  public Address(String street, String city, String state) {
-    this.street = street;
-    this.city = city;
-    this.state = state;
-  }
-
-  public String getStreet() {
-    return street;
-  }
-
-  public String getCity() {
-    return city;
-  }
-
-  public String getState() {
-    return state;
-  }
-}
-
-class Person {
-  private String name; // instance variable for name
-  private Address address; // instance variable for address (aggregation relationship)
-
-  public Person(String name, Address address) {
-    this.name = name;
-    this.address = address;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public Address getAddress() {
-    return address;
-  }
-}
-
-class Employee extends Person { // inheritance relationship
-  private int employeeId; // instance variable for employee ID
-
-  public Employee(String name, Address address, int employeeId) {
-    super(name, address);
-    this.employeeId = employeeId;
-  }
-
-  public int getEmployeeId() {
-    return employeeId;
-  }
-}
-
-class Department {
-  private String name; // instance variable for name
-  private List<Employee> employees; // instance variable for list of employees (composition relationship)
-
-  public Department(String name) {
-    this.name = name;
-    this.employees = new ArrayList<>();
-  }
-
-  public void addEmployee(Employee employee) {
-    employees.add(employee);
-  }
-
-  public List<Employee> getEmployees() {
-    return employees;
-  }
-
-  public String getName() {
-    return name;
-  }
+    public String getName() {
+        return name;
+    }
 }
 
 class Company {
-  private String name; // instance variable for name
-  private List<Department> departments; // instance variable for list of departments (composition relationship)
+    private String name; // instance variable for name
+    private List<Department> departments; // instance variable for list of departments (composition relationship)
 
-  public Company(String name) {
-    this.name = name;
-    this.departments = new ArrayList<>();
-  }
+    public Company(String name) {
+        this.name = name;
+        this.departments = new ArrayList<>();
+    }
 
-  public void addDepartment(Department department) {
-    departments.add(department);
-  }
+    public void addDepartment(Department department) {
+        departments.add(department);
+    }
 
-  public List<Department> getDepartments() {
-    return departments;
-  }
+    public List<Department> getDepartments() {
+        return departments;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public String getName() {
+        return name;
+    }
 }
+public class Main {
+    public static void main(String[] args) {
 
-class Main {
-  public static void main(String[] args) {
-    Address address1 = new Address("123 Main St", "Anytown", "USA");
-    Address address2 = new Address("456 Elm St", "Anytown", "USA");
-    Employee alice = new Employee("Alice", address1, 123); // association relationship between Employee and Address
-    Employee bob = new Employee("Bob", address2, 456); // association relationship between Employee and Address
-    Department hr = new Department("Human Resources");
-    hr.addEmployee(alice);
-    hr.addEmployee(bob); // composition relationship between Department and Employee
-    Company acme = new Company("ACME");
-    acme.addDepartment(hr); // composition relationship between Company and Department
+        System.out.println("Hello world!");
+        Address address1 = new Address("123 Main St", "Anytown", "USA");
+        Address address2 = new Address("456 Elm St", "Anytown", "USA");
+        Employee alice = new Employee("Alice", address1, 123); // association relationship between Employee and Address
+        Employee bob = new Employee("Bob", address2, 456); // association relationship between Employee and Address
+        Department hr = new Department("Human Resources");
+        hr.addEmployee(alice);
+        hr.addEmployee(bob); // composition relationship between Department and Employee
+        Company acme = new Company("ACME");
+        acme.addDepartment(hr); // composition relationship between Company and Department
 
-    System.out.println("Employees of " + hr.getName() + " department at " + acme.getName() + ":");
-              for (Employee employee : hr.getEmployees()) {
-                System.out.println("- " + employee.getName() + " (ID: " + employee.getEmployeeId() + ")");
-              }
-            }
-          }
+        System.out.println("Employees of " + hr.getName() + " department at " + acme.getName() + ":");
+        for (Employee employee : hr.getEmployees()) {
+            System.out.println("- " + employee.getName() + " (ID: " + employee.getEmployeeId() + ")");
+        }
+    }
+}
