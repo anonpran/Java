@@ -1,0 +1,176 @@
+#inheritance
+public class Animal {
+   public void eat() {
+      System.out.println("This animal is eating.");
+   }
+}
+
+public class Cat extends Animal {
+   public void meow() {
+      System.out.println("Meow!");
+   }
+}
+
+// usage:
+Cat cat = new Cat();
+cat.eat();  // Output: This animal is eating.
+cat.meow(); // Output: Meow!
+
+#association
+public class Book {
+   private String title;
+   private Author author;
+
+   public Book(String title, Author author) {
+      this.title = title;
+      this.author = author;
+   }
+
+   public String getTitle() {
+      return title;
+   }
+
+   public Author getAuthor() {
+      return author;
+   }
+}
+
+public class Author {
+   private String name;
+   private int age;
+
+   public Author(String name, int age) {
+      this.name = name;
+      this.age = age;
+   }
+
+   public String getName() {
+      return name;
+   }
+
+   public int getAge() {
+      return age;
+   }
+}
+
+// usage:
+Author author = new Author("John Smith", 40);
+Book book = new Book("A Great Book", author);
+System.out.println(book.getTitle());     // Output: A Great Book
+System.out.println(book.getAuthor()); 
+
+#aggration
+public class Person {
+   private List<Address> addresses;
+
+   public void addAddress(Address address) {
+      addresses.add(address);
+   }
+
+   public List<Address> getAddresses() {
+      return addresses;
+   }
+}
+
+public class Address {
+   private String street;
+   private String city;
+   private String state;
+   private String zip;
+
+   public Address(String street, String city, String state, String zip) {
+      this.street = street;
+      this.city = city;
+      this.state = state;
+      this.zip = zip;
+   }
+
+   // getters and setters
+}
+
+// usage:
+Person person = new Person();
+Address address = new Address("123 Main St", "Anytown", "CA", "12345");
+person.addAddress(address);
+List<Address> addresses = person.getAddresses();
+System.out.println(addresses.get(0).getStreet());
+
+#composition
+public class Car {
+   private Engine engine;
+
+   public Car() {
+      engine = new Engine();
+   }
+
+   public void startEngine() {
+      engine.start();
+   }
+}
+
+public class Engine {
+   public void start() {
+      System.out.println("The engine has started.");
+   }
+}
+
+// usage:
+Car car = new Car();
+car.startEngine(); // Output: The engine has started.
+
+#abstract
+public abstract class Animal {
+   private String name;
+
+   public Animal(String name) {
+      this.name = name;
+   }
+
+   public String getName() {
+      return name;
+   }
+
+   public abstract void makeSound();
+}
+
+public class Dog extends Animal {
+   public Dog(String name) {
+      super(name);
+   }
+
+   public void makeSound() {
+      System.out.println("Woof!");
+   }
+}
+
+// usage:
+Animal dog = new Dog("Rex");
+System.out.println(dog.getName()); // Output: Rex
+dog.makeSound();  
+
+#interface
+public interface Shape {
+   double getArea();
+   double getPerimeter();
+}
+
+public class Circle implements Shape {
+   private double radius;
+
+   public Circle(double radius) {
+      this.radius = radius;
+   }
+
+   public double getArea() {
+      return Math.PI * radius * radius;
+   }
+
+   public double getPerimeter() {
+      return 2 * Math.PI * radius;
+   }
+}
+
+// usage:
+Shape circle = new Circle(5);
+System.out.println(circle.getArea());      // Output: 78.53981633974483
+System.out.println(circle.getPerimeter());
