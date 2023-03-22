@@ -1,0 +1,122 @@
+
+import java.util.Scanner;
+
+class Calculator {
+    private int result;
+
+    public Calculator() {
+        result = 0;
+    }
+
+    public synchronized void add(int number) {
+        result += number;
+    }
+
+    public synchronized void subtract(int number) {
+        result -= number;
+    }
+
+    public synchronized void multiply(int number) {
+        result *= number;
+    }
+
+    public synchronized void divide(int number) {
+        result /= number;
+    }
+
+    public int getResult() {
+        return result;
+    }
+}
+
+class AdditionThread implements Runnable {
+    private Calculator calculator;
+    private int number;
+
+    public AdditionThread(Calculator calculator, int number) {
+        this.calculator = calculator;
+        this.number = number;
+    }
+
+    public void run() {
+        calculator.add(number);
+    }
+}
+
+class SubtractionThread implements Runnable {
+    private Calculator calculator;
+    private int number;
+
+    public SubtractionThread(Calculator calculator, int number) {
+        this.calculator = calculator;
+        this.number = number;
+    }
+
+    public void run() {
+        calculator.subtract(number);
+    }
+}
+
+class MultiplicationThread implements Runnable {
+    private Calculator calculator;
+    private int number;
+
+    public MultiplicationThread(Calculator calculator, int number) {
+        this.calculator = calculator;
+        this.number = number;
+    }
+
+    public void run() {
+        calculator.multiply(number);
+    }
+}
+
+class DivisionThread implements Runnable {
+    private Calculator calculator;
+    private int number;
+
+    public DivisionThread(Calculator calculator, int number) {
+        this.calculator = calculator;
+        this.number = number;
+    }
+
+    public void run() {
+        calculator.divide(number);
+    }
+}
+
+class Calculator_Multi {
+    public static void main(String[] args) {
+        Calculator calculator = new Calculator();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter first number: ");
+        int a = scanner.nextInt();
+        System.out.print("Enter second number: ");
+        int b = scanner.nextInt();
+
+        Thread additionThread = new Thread(new AdditionThread(calculator, a + b));
+        Thread subtractionThread = new Thread(new SubtractionThread(calculator, a - b));
+        Thread multiplicationThread = new Thread(new MultiplicationThread(calculator, a * b));
+        Thread divisionThread = new Thread(new DivisionThread(calculator, a / b));
+
+        additionThread.start();
+        subtractionThread.start();
+        multiplicationThread.start();
+        divisionThread.start();
+
+        try {
+            additionThread.join();
+            subtractionThread.join();
+            multiplicationThread.join();
+            divisionThread.join();
+        } catch (InterruptedException e) {
+            System.out.println("Interrupted: " + e);
+        }
+
+        System.out.println("Addition result: " + calculator.getResult());
+        System.out.println("Subtraction result: " + calculator.getResult());
+        System.out.println("Multiplication result: " + calculator.getResult());
+        System.out.println("Division result: " + calculator.getResult());
+    }
+}
